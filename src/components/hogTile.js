@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-function hogTile({ hog }) {
+
+function hogTile({ hog, hideHog }) {
     const [showDetails, setShowDetails] = useState(false);
     //Toggles details display
     const handleClick = () => setShowDetails(!showDetails);
@@ -16,6 +17,13 @@ function hogTile({ hog }) {
                     <p>Highest Medal: {hog["highest medal achieved"]}</p>
                     </div>
             )}
+            {/* hide button to remove the hog from view */}
+            <button onClick={(e) => {
+              e.stopPropagation(); //prevents the parent click event from firing
+              hideHog(hog.name);
+            }}>
+                hide
+                </button>
         </div>
     );
 }

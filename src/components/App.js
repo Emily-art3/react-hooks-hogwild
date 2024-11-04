@@ -5,6 +5,7 @@ import hogs from "../porkers_data";
 import React, { useState } from "react";
 import hogsData from "./porkers_data"; // Imports the hog data
 import hogTile from "./hogTile"; //imports the hogTile component
+import NewHogForm from "./NewHogForm";
 
 function App() {
 	const [hogs, setHogs] = useState(hogsData); 	//Sets up state for allhogs
@@ -12,8 +13,17 @@ function App() {
 	const [sortType, setSortType] = useState("name"); // sorts by name or weight
 	const [hiddenHogs, setHiddenHogs] = useState([]); // Tracks hidden hogs
 	
+	// function to add a hog's name to hiddenhogs array
+	const hideHog = (name) => {
+		setHiddenHogs([...hiddenHogs, name]);
+	};
+    // function to add new hog's to the array
+	const addHog = (newHog) => {
+		setHogs([...hogs, newHog]);
+	  };
+	
 
-	//filters and sorts hogs array
+	//filters and sorts lists of hogs, excluding hidden hogs
 	const displayHogs = hogs
 	.filter(hog => !hiddenHogs.includes(hog.name))
 	.filter(hog => !filterGreased || hog.greased)
@@ -24,11 +34,14 @@ function App() {
 
 	//renders the APP for the component
 	return (
-		<div className="App">
+		<div> 
+			<NewHogForm addHog={addHog} />
+			<div className="App">
 			{displayHogs.map(hog => (
-				<hogTile key={hog.name} hog={hog} />
+				<hogTile key={hog.name} hog={hog} hideHog={hideHog}/>
 			))}
 			<Nav />
+		</div>
 		</div>
 	);
 }
