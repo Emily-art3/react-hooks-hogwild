@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function hogTile({ hog, hideHog }) {
+function HogTile({ hog, hideHog }) {
     const [showDetails, setShowDetails] = useState(false);
     //Toggles details display
     const handleClick = () => setShowDetails(!showDetails);
@@ -8,7 +8,7 @@ function hogTile({ hog, hideHog }) {
     return(
         <div className="App" onClick={handleClick}>
             <h3>{hog.name}</h3>
-            <img src={hog.name} alt={hog.name} />
+            <img src={hog.image} alt={hog.image} />
             {showDetails && (
                 <div>
                     <p>Specialty: {hog.specialty}</p>
@@ -27,4 +27,4 @@ function hogTile({ hog, hideHog }) {
         </div>
     );
 }
-export default hogTile;
+export default HogTile;
